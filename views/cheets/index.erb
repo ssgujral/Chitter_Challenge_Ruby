@@ -1,10 +1,30 @@
+
+<form action="/cheets" method="post">
+  
+  <input type="text" name="cheet" />
+
+  <input type="submit" value="Submit" />
+
+</form>
+
 <ul>
+
+
+
   <% @cheets.each do |cheet|      %>
 
-  <li>
+  <li class="cheet" id="cheet-<%= cheet.id %>">
       
         <%= cheet.cheet %>
       
+      <form action ="/cheets/<%= cheet.id %>" method="post">
+
+      <input type='hidden' name='_method' value='DELETE'/>
+
+        <input type="submit" value="Delete">
+      
+      </form>
+
     </li>
 
 

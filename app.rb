@@ -2,10 +2,14 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require './lib/cheet'
 
+
+
 class Chitter < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+
+  enable :sessions, :method_override
 
   get '/' do
     'Chitter'
@@ -26,6 +30,11 @@ class Chitter < Sinatra::Base
     
     #p params
     #p "Form data submitted to the /cheets route!"
+  end
+
+  delete '/cheets/:id' do
+    Cheet.delete(id: params[:id])
+    redirect '/cheets'
   end
 
   run! if app_file == $0
