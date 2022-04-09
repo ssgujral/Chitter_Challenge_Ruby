@@ -16,7 +16,17 @@ class Chitter < Sinatra::Base
     erb :'cheets/index'
   end
 
+  get '/cheets/new' do
+    erb :'cheets/new'
+  end
 
+  post '/cheets' do
+    Cheet.create(cheet: params[:cheet])
+    redirect '/cheets'
+    
+    #p params
+    #p "Form data submitted to the /cheets route!"
+  end
 
   run! if app_file == $0
 end
