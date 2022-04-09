@@ -2,10 +2,9 @@ require 'pg'
 
 class Cheet
 
-attr_reader :id, :cheet
+attr_reader  :cheet
 
-def initialize(id:, cheet:)
-  @id = id
+def initialize(cheet:)
   @cheet = cheet
 end
 
@@ -18,16 +17,18 @@ end
       
       #cheet_post['cheet']
       
-      Cheet.new(id: cheet_post['id'], cheet: cheet_post['cheet'])
+      Cheet.new(cheet: cheet_post['cheet'])
     } 
   end
 
   def self.create(cheet:)
     chitter_database_access = PG.connect(dbname: 'chitter_challenge')
   
-    result = chitter_database_access.exec("INSERT INTO cheets (cheet) VALUES('#{cheet}') RETURNING id, cheet")
+    result = 
+    
+    chitter_database_access.exec_params("INSERT INTO cheets (cheet) VALUES($1) RETURNING cheet;", [cheet])
 
-    Cheet.new(id: result[0]['id'], cheet: result[0]['cheet'])
+    Cheet.new(cheet: result[0]['cheet'])
   end
 
 end
