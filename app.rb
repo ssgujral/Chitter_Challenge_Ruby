@@ -11,15 +11,15 @@ class Chitter < Sinatra::Base
   end
 
   get '/cheets' do
-    cheets = [
+    @cheets = [
         "Loud Cheet 1",
         "Loud Cheet 2",
         "Loud Cheet 3"
     ]
 
-    cheets.join
-
+    erb :'cheets/index'
   end
+
 
 
   run! if app_file == $0
