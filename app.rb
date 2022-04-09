@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require './lib/cheet'
 
 class Chitter < Sinatra::Base
   configure :development do
@@ -11,12 +12,7 @@ class Chitter < Sinatra::Base
   end
 
   get '/cheets' do
-    @cheets = [
-        "Loud Cheet 1",
-        "Loud Cheet 2",
-        "Loud Cheet 3"
-    ]
-
+    @cheets = Cheet.all
     erb :'cheets/index'
   end
 
